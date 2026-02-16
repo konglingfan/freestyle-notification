@@ -67,7 +67,7 @@ To run this script automatically (e.g., every hour), add a cron job:
     ```bash
     crontab -e
     ```
-2.  Add a line (replace path with your actual project location):
+    2.  Add a line (replace `/path/to/project` with your actual project location):
     ```cron
-    0 * * * * /Users/lingfankong/Projects/freestyle-notifier/run.sh >> /Users/lingfankong/Projects/freestyle-notifier/debug_output.txt 2>&1
+    0 * * * * /path/to/project/run.sh >> /path/to/project/debug_output.txt 2>&1
     ```
