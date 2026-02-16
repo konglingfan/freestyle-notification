@@ -49,12 +49,14 @@ A Python script to monitor and notify users about available "Freestyle" ice skat
 Checks for the default target date (first Sunday of the next month):
 ```bash
 python3 main.py
+# OR using the helper script
+./run.sh
 ```
 
 ### Manual Date Override
 Check for a specific date (YYYY-MM-DD):
 ```bash
-python3 main.py --date 2026-02-27
+./run.sh --date 2026-02-27
 ```
 
 ## Automation (Cron Job)
@@ -65,7 +67,7 @@ To run this script automatically (e.g., every hour), add a cron job:
     ```bash
     crontab -e
     ```
-2.  Add a line (replace paths with your actual project location):
+2.  Add a line (replace path with your actual project location):
     ```cron
-    0 * * * * cd /path/to/freestyle-notifier && source venv/bin/activate && python3 main.py >> debug_output.txt 2>&1
+    0 * * * * /Users/lingfankong/Projects/freestyle-notifier/run.sh >> /Users/lingfankong/Projects/freestyle-notifier/debug_output.txt 2>&1
     ```
