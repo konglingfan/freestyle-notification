@@ -2,7 +2,9 @@ import sqlite3
 from datetime import datetime
 import os
 
-DB_NAME = "notifications.db"
+# Use absolute path for DB to avoid CWD issues
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_NAME = os.path.join(BASE_DIR, "notifications.db")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_NAME)
