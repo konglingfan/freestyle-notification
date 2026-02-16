@@ -4,11 +4,13 @@ import re
 from datetime import date, timedelta
 from typing import List, Dict, Any, Tuple
 
-# Constants based on analysis
+import os
+
+# Constants
 BASE_URL = "https://apps.daysmartrecreation.com/dash/jsonapi/api/v1"
-COMPANY_SLUG = "sharks"
-FACILITY_ID = "1"
-SPORT_ID = "27"
+COMPANY_SLUG = os.getenv("COMPANY_SLUG", "sharks")
+FACILITY_ID = os.getenv("FACILITY_ID", "1")
+SPORT_ID = os.getenv("SPORT_ID", "27")
 
 def clean_html(raw_html: str) -> str:
     if not raw_html:

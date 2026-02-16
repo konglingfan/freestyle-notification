@@ -1,15 +1,14 @@
 # Freestyle Notifier
 
-A Python script to monitor and notify users about available "Freestyle" ice skating sessions at Sharks Ice (San Jose).
+A Python script to monitor and notify users about available sessions (e.g., "Freestyle" ice skating) at any facility using **DaySmart Recreation**.
 
 ## Features
 
-- **Automated Monitoring**: Checks for available sessions for the upcoming month (specifically targeting the first Sunday of the next month by default).
+- **Automated Monitoring**: Checks for available sessions for the upcoming month (targeting the first Sunday of the next month by default).
 - **Smart Filtering**:
-    - Selects only **San Jose** facility (ID 1).
-    - Filters for specific **Freestyle** sessions (excluding "Ice Dance", "Open Gym", etc.).
-    - Uses correct API parameters (`sport_id=27`, `unconstrained=1`) to match the official web view.
-- **Duplicate Prevention**: Uses a local SQLite database (`notifications.db`) to ensure you only receive one email per month/cycle, preventing spam.
+    - configurable **Facility ID** and **Sport ID**.
+    - Filters for specific sessions (default: Freestyle) using "unconstrained" search parameters matching the web view.
+- **Duplicate Prevention**: Uses a local SQLite database (`notifications.db`) to ensure you only receive one email per month/cycle.
 - **Email Notifications**: Sends an HTML-formatted email with registration links via **Resend**.
 
 ## Project Structure
@@ -42,6 +41,11 @@ A Python script to monitor and notify users about available "Freestyle" ice skat
         - `RESEND_API_KEY`: Your Resend API key.
         - `FROM_EMAIL`: The email address to send from (must be verified in Resend).
         - `TARGET_EMAILS`: Comma-separated list of email addresses to receive notifications.
+        
+        **DaySmart Configuration** (Defaults set for Sharks Ice - SJ):
+        - `COMPANY_SLUG`: The subdomain of the facility (e.g., `sharks` for https://apps.daysmartrecreation.com/dash/x/#/online/sharks).
+        - `FACILITY_ID`: The internal ID of the specific rink/location.
+        - `SPORT_ID`: The ID for the sport/activity type (e.g., `27` for specific skating sessions).
 
 ## Usage
 
