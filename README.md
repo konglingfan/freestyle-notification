@@ -75,3 +75,7 @@ To run this script automatically (e.g., every hour), add a cron job:
     ```cron
     0 * * * * /path/to/project/run.sh >> /path/to/project/debug_output.txt 2>&1
     ```
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
