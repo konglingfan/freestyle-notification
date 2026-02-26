@@ -125,6 +125,7 @@ def check_availability(events: List[Dict], included: List[Dict]) -> List[Dict]:
             # Extract YYYY-MM-DD from start_time (which is ISO format)
             date_str = start_time.split('T')[0]
             available_sessions.append({
+                'id': str(event_id),
                 'name': name,
                 'start': start_time,
                 'openings': openings,

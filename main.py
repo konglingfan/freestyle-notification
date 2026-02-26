@@ -4,7 +4,7 @@ import resend
 from dotenv import load_dotenv
 from date_utils import get_first_sunday_of_next_month
 from api_client import fetch_events, check_availability
-from db_client import init_db, check_if_sent, mark_as_sent
+from db_client import init_db, check_new_sessions, mark_sessions_as_notified
 
 # Load environment variables
 load_dotenv()
@@ -66,18 +66,17 @@ def main():
     
     # Initialize DB
     init_db()
-    
-    # Check for duplicates
-    target_month_str = target_date.strftime("%Y-%m")
-    if check_if_sent(target_month_str):
-        print(f"Notification for {target_month_str} already sent. Skipping.")
-        return
 
     events, included = fetch_events(target_date)
     available_sessions = check_availability(events, included)
 
     if available_sessions:
         print(f"Found {len(available_sessions)} available sessions!")
+        
+        session_ids = [s['id'] for s in available_sessions]
+        if not check_new_sessions(session_ids):
+            print("No new sessions found since last notification. Skipping email.")
+            return
         
         # Construct Email Body
         # HTML format for better readability
@@ -97,8 +96,8 @@ def main():
         
         print("Sending Email Notification...")
         if send_email(subject, html_body):
-            mark_as_sent(target_month_str)
-            print(f"Marked {target_month_str} as sent in DB.")
+            mark_sessions_as_notified(session_ids)
+            print("Marked sessions as notified in DB.")
     else:
         print("No sessions available.")
 
